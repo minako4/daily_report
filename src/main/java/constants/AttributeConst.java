@@ -50,7 +50,7 @@ public enum AttributeConst {
     private final Integer i;
 
     private AttributeConst(final String text) {
-        this.text= text;
+        this.text = text;
         this.i = null;
 
     }
