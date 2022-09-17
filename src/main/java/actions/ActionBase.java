@@ -17,6 +17,7 @@ import constants.PropertyConst;
 
 /**
  * 各Actionクラスの親クラス。共通処理を行う
+ *
  */
 public abstract class ActionBase {
     protected ServletContext context;
@@ -38,7 +39,6 @@ public abstract class ActionBase {
         this.context = servletContext;
         this.request = servletRequest;
         this.response = servletResponse;
-
     }
 
     /**
@@ -63,10 +63,9 @@ public abstract class ActionBase {
             String command = request.getParameter(ForwardConst.CMD.getValue());
 
             //commandに該当するメソッドを実行する
-            //(例: action=Employee command=show の場合 EmployeeActionクラスのshow()メソッドを実行する
+            //（例： action=Employee command=show の場合 EmployeeActionクラスのshow()メソッドを実行する）
             commandMethod = this.getClass().getDeclaredMethod(command, new Class[0]);
-            commandMethod.invoke(this, new Object[0]);//メソッドに渡す引数はなし
-
+            commandMethod.invoke(this, new Object[0]); //メソッドに渡す引数はなし
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NullPointerException e) {
 
@@ -81,13 +80,13 @@ public abstract class ActionBase {
 
     /**
      * 指定されたjspの呼び出しを行う
-     * @param target 遷移先jsp画面のファイル名(拡張子を含まない)
+     * @param target 遷移先jsp画面のファイル名（拡張子を含まない）
      * @throws ServletException
      * @throws IOException
      */
     protected void forward(ForwardConst target) throws ServletException, IOException {
 
-        //jsp ファイルの相対パスを作成
+        //jspファイルの相対パスを作成
         String forward = String.format("/WEB-INF/views/%s.jsp", target.getValue());
         RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 
@@ -98,8 +97,8 @@ public abstract class ActionBase {
 
     /**
      * URLを構築しリダイレクトを行う
-     * @param actionパラメータに設定する値
-     * @param commandパラメータに設定する値
+     * @param action パラメータに設定する値
+     * @param command パラメータに設定する値
      * @throws ServletException
      * @throws IOException
      */
@@ -118,12 +117,11 @@ public abstract class ActionBase {
     }
 
     /**
-     * CSRF対策token不正の場合はエラー画面を表示する
-     * @return true:token有効 false:token不正
-     * @throws ServletException
-     * @throws IOException
-     */
-
+    * CSRF対策 token 不正の場合はエラー画面を表示
+    * @return true: token有効 false: token不正
+    * @throws ServletException
+    * @throws IOException
+    */
     protected boolean checkToken() throws ServletException, IOException {
 
         //パラメータからtokenの値を取得
@@ -152,9 +150,8 @@ public abstract class ActionBase {
 
     /**
      * リクエストから表示を要求されているページ数を取得し、返却する
-     * @return 要求されているページ数（要求がない場合は1)
+     * @return 要求されているページ数(要求がない場合は1)
      */
-
     protected int getPage() {
         int page;
         page = toNumber(request.getParameter(AttributeConst.PAGE.getValue()));
@@ -162,6 +159,7 @@ public abstract class ActionBase {
             page = 1;
         }
         return page;
+
     }
 
     /**
@@ -185,11 +183,11 @@ public abstract class ActionBase {
      * @return 変換後LocalDateインスタンス
      */
     protected LocalDate toLocalDate(String strDate) {
-        if(strDate == null || strDate.equals("")) {
+        if (strDate == null || strDate.equals("")) {
             return LocalDate.now();
-
         }
         return LocalDate.parse(strDate);
+
     }
 
     /**
@@ -199,8 +197,6 @@ public abstract class ActionBase {
      */
     protected String getRequestParam(AttributeConst key) {
         return request.getParameter(key.getValue());
-
-
     }
 
     /**
@@ -208,14 +204,12 @@ public abstract class ActionBase {
      * @param key パラメータ名
      * @param value パラメータの値
      */
-
     protected <V> void putRequestScope(AttributeConst key, V value) {
         request.setAttribute(key.getValue(), value);
-
     }
 
     /**
-     * セッションスコープから指定されたパラメータの値を取得し返却する
+     * セッションスコープから指定されたパラメータの値を取得し、返却する
      * @param key パラメータ名
      * @return パラメータの値
      */
@@ -231,9 +225,7 @@ public abstract class ActionBase {
      */
     protected <V> void putSessionScope(AttributeConst key, V value) {
         request.getSession().setAttribute(key.getValue(), value);
-
     }
-
     /**
      * セッションスコープから指定された名前のパラメータを除去する
      * @param key パラメータ名
@@ -241,15 +233,13 @@ public abstract class ActionBase {
     protected void removeSessionScope(AttributeConst key) {
         request.getSession().removeAttribute(key.getValue());
     }
-
     /**
-     * アプリケーションスコープから指定されたパラメータの値を取得し返却する
+     * アプリケーションスコープから指定されたパラメータの値を取得し、返却する
      * @param key パラメータ名
      * @return パラメータの値
      */
     @SuppressWarnings("unchecked")
     protected <R> R getContextScope(PropertyConst key) {
         return (R) context.getAttribute(key.getValue());
-
     }
 }

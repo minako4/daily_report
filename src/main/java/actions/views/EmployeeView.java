@@ -1,4 +1,4 @@
-package views;
+package actions.views;
 
 import java.time.LocalDateTime;
 

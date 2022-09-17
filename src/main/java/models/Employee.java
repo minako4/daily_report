@@ -86,7 +86,7 @@ public class Employee {
      * 更新日時
      */
     @Column(name = JpaConst.EMP_COL_UPDATED_AT, nullable =false)
-    private LocalDateTime updatedAT;
+    private LocalDateTime updatedAt;
 
     /**
      * 削除された従業員かどうか

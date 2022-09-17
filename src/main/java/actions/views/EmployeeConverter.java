@@ -1,4 +1,4 @@
-package views;
+package actions.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class EmployeeConverter {
                                 ? AttributeConst.ROLE_ADMIN.getIntegerValue()
                                 : AttributeConst.ROLE_GENERAL.getIntegerValue(),
                 e.getCreatedAt(),
-                e.getUpdatedAT(),
+                e.getUpdatedAt(),
                 e.getDeleteFlag() == null
                         ? null
                         : e.getDeleteFlag() == JpaConst.EMP_DEL_TRUE
@@ -97,9 +97,9 @@ public class EmployeeConverter {
         e.setCode(ev.getCode());
         e.setName(ev.getName());
         e.setPassword(ev.getPassword());
-        e.setAdminFlag(e.getAdminFlag());
+        e.setAdminFlag(ev.getAdminFlag());
         e.setCreatedAt(ev.getCreatedAt());
-        e.setUpdatedAT(ev.getUpdatedAt());
+        e.setUpdatedAt(ev.getUpdatedAt());
         e.setDeleteFlag(ev.getDeleteFlag());
 
 
