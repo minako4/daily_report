@@ -12,12 +12,12 @@ import utils.DBUtil;
 public class ServiceBase {
 
     /**
-     * EntitiyManagerインスタンス
+     * EntityManagerインスタンス
      */
     protected EntityManager em = DBUtil.createEntityManager();
 
     /**
-     * EntitiyManagerのクローズ
+     * EntityManagerのクローズ
      */
     public void close() {
         if (em.isOpen()) {

@@ -89,7 +89,7 @@ public class EmployeeService extends ServiceBase {
     public long countByCode(String code) {
 
         //指定した社員番号を保持する従業員の件数を取得する
-        long employees_count = (long) em.createNamedQuery(JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE, long.class)
+        long employees_count = (long) em.createNamedQuery(JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_CODE, code)
                 .getSingleResult();
         return employees_count;
@@ -151,7 +151,7 @@ public class EmployeeService extends ServiceBase {
             //パスワードに入力がある場合
 
             //パスワードについてのバリデーションを行う
-            validateCode = true;
+            validatePass = true;
 
             //変更後のパスワードをハッシュ化し設定する
             savedEmp.setPassword(
@@ -223,7 +223,7 @@ public class EmployeeService extends ServiceBase {
     }
 
     /**
-    * idを条件にデータを1権取得し、Employeeのインスタンスで返却する
+    * idを条件にデータを1件取得し、Employeeのインスタンスで返却する
     * @param id
     * @return 取得データのインスタンス
     */
