@@ -14,6 +14,7 @@ import constants.ForwardConst;
  */
 public class TopAction extends ActionBase {
 
+
     /**
      *  indexメソッドを実行する
      */
@@ -29,7 +30,7 @@ public class TopAction extends ActionBase {
      */
     public void index() throws ServletException, IOException {
 
-        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+      //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
         if (flush != null) {
             putRequestScope(AttributeConst.FLUSH, flush);
