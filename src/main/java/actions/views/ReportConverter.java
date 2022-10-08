@@ -3,6 +3,7 @@ package actions.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Follow;
 import models.Report;
 
 /**
@@ -77,4 +78,10 @@ public class ReportConverter {
         r.setUpdatedAt(rv.getUpdatedAt());
 
     }
+
+    public static Object toModel(Follow f) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
+
 }

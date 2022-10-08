@@ -47,9 +47,9 @@ public enum AttributeConst {
     REP_CONTENT("content_msg"),
 
     //フォロー
-    USER ("user"),
     USER_ID ("id"),
-    FOLLOW ("follow");
+    FOLLOWER ("follower"),
+    FOLLOWEE ("followee");
 
     private final String text;
     private final Integer i;

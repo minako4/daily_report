@@ -259,4 +259,16 @@ public class EmployeeService extends ServiceBase {
         em.getTransaction().commit();
 
     }
+
+    /**
+     * idを条件に取得したデータをEmployeeViewのインスタンスで返却する
+     * @param id
+     * @return 取得データのインスタンス
+     * 「idを条件にデータを１件取得する。」
+     */
+    public Employee getEmployee(int id) {
+        Employee e = findOneInternal(id);
+        return e;
+    }
+
 }

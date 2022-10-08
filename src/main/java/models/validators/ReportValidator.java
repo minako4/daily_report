@@ -5,6 +5,7 @@ import java.util.List;
 
 import actions.views.ReportView;
 import constants.MessageConst;
+import models.Follow;
 
 /**
  * 日報インスタンスに設定されている値のバリデーションを行うクラス
@@ -60,4 +61,10 @@ public class ReportValidator {
         //入力値がある場合は空文字を返却
         return "";
     }
+    public static List<String> validate(Follow f) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
+
+
 }
