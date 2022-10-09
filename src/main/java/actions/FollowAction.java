@@ -35,7 +35,7 @@ public class FollowAction extends ActionBase {
     public void create() throws ServletException, IOException {
 
             //動作確認メッセージを出力
-            System.out.println("FollowAction::create を実行");
+            //System.out.println("FollowAction::create を実行");
 
             //セッションからログイン中の従業員情報を取得
             EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
@@ -58,13 +58,13 @@ public class FollowAction extends ActionBase {
                 follower, //ログインしている従業員を、followerとして登録する
                 followee
                 );
-
-      //動作確認メッセージを出力
-        System.out.println("フォロワーに登録されたidは"+ ev + "です");
-        System.out.println("フォロイーに登録されたidは"+ followee + "です");
-
-
-        //Follow情報登録
+        
+        //follower,followeeより、フォローテーブルを検索して
+        //フォロー情報の存在チェック
+        
+        
+        //存在したらエラー表示に使うメッセージをスコープにセット
+        //存在しなければFollow情報登録
         service.create(f);
 
 

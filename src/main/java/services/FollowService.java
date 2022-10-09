@@ -37,5 +37,40 @@ public class FollowService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+    /**
+     * followerIDとfolloweeIDを条件に検索し、データが存在するか
+     * @param follower フォロワー
+     * @param followee フォロイー
+     *
+     * @return 認証結果を返却する（成功（登録されてない：true 失敗 (登録されている:false）
+     *
+     */
+     public Boolean relation(int follower, int followee) {
+
+         boolean noRelation = true;
+         if (follower != 0  && followee != 0) {
+             Follow f = findRelation(follower, followee);
+
+             if (f != null && f.getId() != null) {
+
+                 //データが取得できた場合、登録されてます
+                 noRelation = false;
+             }
+         }
+
+         //認証結果を返却する
+         return noRelation;
+     }
+
+
+    private Follow findRelation(int follower, int followee) {
+            Follow f = findRelation(follower, followee);
+
+            return f;
+    }
+
+
+
+
 }
 
