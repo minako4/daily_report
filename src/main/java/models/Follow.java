@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import actions.views.EmployeeView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +28,7 @@ import lombok.Setter;
     @Entity
     @Table(name = "follow")
 public class Follow {
-        public Follow(Object object, EmployeeView ev, Employee followee) {
-        }
+
 
         /**
          * id

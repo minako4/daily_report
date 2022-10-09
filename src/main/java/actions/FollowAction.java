@@ -32,54 +32,6 @@ public class FollowAction extends ActionBase {
         service2.close();
     }
 
-
-    /**
-     * 新規登録を行う
-     * @throws ServletException
-     * @throws IOException
-
-    public void follow() throws ServletException, IOException {
-
-
-
-        //セッションからログイン中の従業員情報を取得
-        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
-
-        EntityManager em = DBUtil.createEntityManager();
-        em.getTransaction().begin();
-
-        // Followのインスタンスを生成
-        Follow f = new Follow();
-
-        // セッションスコープからIDを取得して
-        // 該当のIDの1件のみをデータベースから取得
-        Employee emp_id = em.find(Employee.class, (Integer)(request.getSession().getAttribute("id")));
-
-        Employee emp_follower = new Employee();
-
-        Employee emp_followee = new Employee();
-
-        f.setFollower(emp_follower);
-
-        f.setFollowee(emp_followee);
-
-
-
-        // データベースに保存
-        em.persist(f);
-        em.getTransaction().commit();
-
-        // 自動採番されたIDの値を表示
-        response.getWriter().append(Integer.valueOf(f.getId()).toString());
-
-        em.close();
-*/
-
-    /**
-     * 新規登録を行う
-     * @throws ServletException
-     * @throws IOException
-     */
     public void create() throws ServletException, IOException {
 
             //動作確認メッセージを出力
@@ -88,16 +40,29 @@ public class FollowAction extends ActionBase {
             //セッションからログイン中の従業員情報を取得
             EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
+            Employee follower =service2.getEmployee((ev.getId()));
+
+
+
         EntityManager em = DBUtil.createEntityManager();
         em.getTransaction().begin();
+
+
+        //フォローしたい従業員のidを取得
         Employee followee = service2.getEmployee(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
 
      // Followのインスタンスを生成
         Follow f = new Follow(
-                null,
-                ev, //ログインしている従業員を、followerとして登録する
+               null,
+                follower, //ログインしている従業員を、followerとして登録する
                 followee
                 );
+
+      //動作確認メッセージを出力
+        System.out.println("フォロワーに登録されたidは"+ ev + "です");
+        System.out.println("フォロイーに登録されたidは"+ followee + "です");
+
 
         //Follow情報登録
         service.create(f);

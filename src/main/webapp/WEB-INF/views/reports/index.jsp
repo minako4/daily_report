@@ -22,6 +22,7 @@
             <tbody>
                 <tr>
                     <th class="report_name">氏名</th>
+
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
@@ -31,8 +32,9 @@
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out value="${report.employee.name}" />
 
-                         <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commFollow}' />">
-                         <input type="hidden" name="followee" id="id"  value='<c:out value="${report.employee.id}" />'  />
+
+                         <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commFollow}&id=${report.employee.id}' />">
+                         <input type="hidden" name="followee" id="id"  value="${report.employee.id}" />
                                 <button type="submit">フォロー</button>
                          </form>
 
