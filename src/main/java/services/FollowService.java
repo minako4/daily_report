@@ -2,6 +2,8 @@ package services;
 
 
 
+
+
 import models.Follow;
 
 
@@ -10,8 +12,6 @@ import models.Follow;
  *
  */
 public class FollowService extends ServiceBase {
-
-
 
     /**
      * フォローの内容を元にデータを1件作成し、フォローテーブルに登録する
@@ -44,14 +44,14 @@ public class FollowService extends ServiceBase {
      *
      * @return 認証結果を返却する（成功（登録されてない：true 失敗 (登録されている:false）
      *
-     */
-     public Boolean relation(int follower, int followee) {
+
+     public Boolean relation(Employee follower, Employee followee) {
 
          boolean noRelation = true;
-         if (follower != 0  && followee != 0) {
-             Follow f = findRelation(follower, followee);
+         if (follower != null && followee != null) {
+             ;
 
-             if (f != null && f.getId() != null) {
+             if (wer.getId() != null && f.getId() != null) {
 
                  //データが取得できた場合、登録されてます
                  noRelation = false;
@@ -62,12 +62,28 @@ public class FollowService extends ServiceBase {
          return noRelation;
      }
 
+     /**
+      * followerのidを条件にデータを1件取得し、followのインスタンスで返却する
+      * @param id
+      * @return 取得データのインスタンス
+      *
+    private Follow findFollower(Employee follower) {
+            Follow wer = em.find(Follow.class,follower);
 
-    private Follow findRelation(int follower, int followee) {
-            Follow f = findRelation(follower, followee);
-
-            return f;
+            return wer;
     }
+            /**
+             * followeeのidを条件にデータを1件取得し、followのインスタンスで返却する
+             * @param id
+             * @return 取得データのインスタンス
+             *
+           private Follow findFollowee(Employee followee) {
+                   Follow wee = em.find(Follow.class,followee);
+
+                   return wee;
+    }
+  */
+
 
 
 

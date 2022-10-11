@@ -6,7 +6,7 @@
 <c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="actEmp" value="${ForwardConst.ACT_EMP.getValue()}" />
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
-
+<c:set var="actFollow" value="${ForwardConst.ACT_FOLLOW.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
@@ -20,8 +20,9 @@
             </div>
         </c:if>
         <h2>日報管理システムへようこそ</h2>
-           
+
         <h3>【自分の日報　一覧】</h3>
+
         <table id="report_list">
             <tbody>
                 <tr>
@@ -56,5 +57,7 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <p>
+
     </c:param>
 </c:import>
