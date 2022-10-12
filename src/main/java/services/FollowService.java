@@ -4,6 +4,9 @@ package services;
 
 
 
+import javax.persistence.NoResultException;
+
+import constants.JpaConst;
 import models.Follow;
 
 
@@ -12,6 +15,7 @@ import models.Follow;
  *
  */
 public class FollowService extends ServiceBase {
+
 
     /**
      * フォローの内容を元にデータを1件作成し、フォローテーブルに登録する
@@ -38,54 +42,45 @@ public class FollowService extends ServiceBase {
     }
 
     /**
-     * followerIDとfolloweeIDを条件に検索し、データが存在するか
-     * @param follower フォロワー
-     * @param followee フォロイー
-     *
-     * @return 認証結果を返却する（成功（登録されてない：true 失敗 (登録されている:false）
-     *
+    * 社員番号、パスワードを条件に取得したデータをEmployeeViewのインスタンスで返却する
+    * @param code 社員番号
+    * @param plainPass パスワード文字列
+    * @param pepper pepper文字列
+    * @return 取得データのインスタンス 取得できない場合null
+    */
+    public Follow findRelation(Follow follower,Follow followee) {
+        Follow f = null;
+        try {
 
-     public Boolean relation(Employee follower, Employee followee) {
 
-         boolean noRelation = true;
-         if (follower != null && followee != null) {
-             ;
+            //followerIDとfolloweeIDを条件に検索し、登録されているrelation
+            f = em.createNamedQuery(JpaConst.Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE, Follow.class)
+                    .setParameter(JpaConst.JPQL_PARM_FOLLOWER, follower)
+                    .setParameter(JpaConst.JPQL_PARM_FOLLOWEE, followee)
+                    .getSingleResult();
 
-             if (wer.getId() != null && f.getId() != null) {
+        } catch (NoResultException ex) {
+        }
 
-                 //データが取得できた場合、登録されてます
-                 noRelation = false;
-             }
-         }
+        return (f);
 
-         //認証結果を返却する
-         return noRelation;
-     }
-
-     /**
-      * followerのidを条件にデータを1件取得し、followのインスタンスで返却する
-      * @param id
-      * @return 取得データのインスタンス
-      *
-    private Follow findFollower(Employee follower) {
-            Follow wer = em.find(Follow.class,follower);
-
-            return wer;
     }
-            /**
-             * followeeのidを条件にデータを1件取得し、followのインスタンスで返却する
-             * @param id
-             * @return 取得データのインスタンス
-             *
-           private Follow findFollowee(Employee followee) {
-                   Follow wee = em.find(Follow.class,followee);
+    /**
+     * idを条件にフォローデータを削除する
+     * @param id
+     */
+    public void destroy(Follow follower, Follow followee) {
 
-                   return wee;
+        //followerとfolloweeを条件に登録済みのフォローを取得する
+        Follow f = findRelation(follower,followee);
+
+        //更新処理を行う
+
+        em.getTransaction().begin();
+        em.remove(f);       // データ削除
+        em.getTransaction().commit();
+
     }
-  */
-
-
-
 
 
 }

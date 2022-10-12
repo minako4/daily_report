@@ -9,6 +9,7 @@
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 <c:set var="actFollow" value="${ForwardConst.ACT_FOLLOW.getValue()}" />
 <c:set var="commFollow" value="${ForwardConst.CMD_CREATE.getValue()}" />
+<c:set var="commDel" value="${ForwardConst.CMD_DESTROY.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -38,6 +39,10 @@
                                 <button type="submit">フォロー</button>
                          </form>
 
+                         <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commDel}&id=${report.employee.id}' />">
+                         <input type="hidden" name="destroy" id="id"  value="${report.employee.id}" />
+                                <button type="submit">フォローを外す</button>
+                         </form>
                         </td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>

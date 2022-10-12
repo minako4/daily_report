@@ -37,7 +37,7 @@ public interface JpaConst {
     String REP_COL_UPDATED_AT = "updated_at";//更新日時
 
     //フォロー・フォロワーテーブル(追記）
-    String TABLE_FOLLOW = "follow";//テーブル名
+    String TABLE_FOLLOW = "follows";//テーブル名
     //フォロー・フォロワーテーブルカラム
     String FOL_COL_ID = "id"; //id
     String FOL_COL_FOLLOWER = "follower"; //フォローする側のid
@@ -55,6 +55,8 @@ public interface JpaConst {
     String JPQL_PARM_PASSWORD = "password";//パスワード
     String JPQL_PARM_EMPLOYEE = "employee";//従業員
     String JPQL_PARM_FOLLOW = "follow";//フォロー
+    String JPQL_PARM_FOLLOWER = "follower";//フォロワー
+    String JPQL_PARM_FOLLOWEE = "followee";//フォロイー
 
 
     //NamedQueryの nameとquery
@@ -85,9 +87,13 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
 
-    //指定した従業員がフォローしたfolloweeを全件idの降順で取得する
-    String Q_FOLLOW_GET_ALL_MINE = ENTITY_REP + ".getAllMine";
-    String Q_FOLLOW_GET_ALL_MINE_DEF = "SELECT f FROM follow AS f WHERE follower = :" + JPQL_PARM_FOLLOW + " ORDER BY r.id DESC";
+    //指定した従業員がフォローした人を全件idの降順で取得する
+    String Q_FOLLOW_GET_ALL_FOLLOW = ENTITY_REP + ".getAllMineFollow";
+    String Q_FOLLOW_GET_ALL_FOLLOW_DEF = "SELECT f FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOW + " ORDER BY r.id DESC";
+
+    //followerIDとfolloweeIDを条件に未削除のrelationの数を取得する
+    String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE = ENTITY_FOLLOW + ".getByFollowerFollowee";
+    String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE_DEF = "SELECT f  FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOWER + " AND f.followee = :" + JPQL_PARM_FOLLOWEE;
 
 
 }

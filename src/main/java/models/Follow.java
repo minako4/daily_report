@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,9 @@ import lombok.Setter;
  *
  */
 @Table(name = "follows")
+@NamedQueries({
 
+})
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
 @Setter //全てのクラスフィールドについてsetterを自動生成する(Lombok)
