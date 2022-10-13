@@ -109,7 +109,7 @@ public class FollowAction extends ActionBase {
 
 
 
-                //idを条件に従業員データを論理削除する
+                //idを条件に従業員データを削除する
                 serviceF.destroy(f, null);
 
                 //セッションに削除完了のフラッシュメッセージを設定

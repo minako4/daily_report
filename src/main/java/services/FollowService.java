@@ -42,10 +42,8 @@ public class FollowService extends ServiceBase {
     }
 
     /**
-    * 社員番号、パスワードを条件に取得したデータをEmployeeViewのインスタンスで返却する
-    * @param code 社員番号
-    * @param plainPass パスワード文字列
-    * @param pepper pepper文字列
+    * follow、followeeを条件に取得したデータをEmployeeViewのインスタンスで返却する
+
     * @return 取得データのインスタンス 取得できない場合null
     */
     public Follow findRelation(Follow follower,Follow followee) {
