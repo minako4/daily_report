@@ -24,6 +24,9 @@ import lombok.Setter;
 @Table(name = "follows")
 @NamedQueries({
     @NamedQuery(
+            name = JpaConst.Q_FOLLOW_GET_ALL_FOLLOW,
+            query = JpaConst.Q_FOLLOW_GET_ALL_FOLLOW_DEF),
+    @NamedQuery(
             name = JpaConst.Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE,
             query = JpaConst.Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE_DEF),
 })

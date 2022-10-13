@@ -4,6 +4,8 @@ package services;
 
 
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import constants.JpaConst;
@@ -78,6 +80,20 @@ public class FollowService extends ServiceBase {
         em.getTransaction().begin();
         em.remove(f);       // データ削除
         em.getTransaction().commit();
+
+    }
+
+    /**
+     * 指定されたページ数の一覧画面に表示する日報データを取得し、Followのリストで返却する
+     * @param page ページ数
+     * @return 一覧画面に表示するデータのリスト
+     */
+    public List<Follow> getAllPerPage(int page) {
+        List<Follow> follows = em.createNamedQuery(JpaConst.Q_FOLLOW_GET_ALL_FOLLOW, Follow.class)
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE)
+                .getResultList();
+        return (follows);
 
     }
 

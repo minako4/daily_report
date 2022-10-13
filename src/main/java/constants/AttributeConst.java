@@ -48,6 +48,7 @@ public enum AttributeConst {
 
     //フォロー
     FOLLOW("follow"),
+    FOLLOWS("follos"),
     FOLLOW_COUNT("follow_count"),
     FOLLOWER ("follower"),
     FOLLOWEE ("followee");
