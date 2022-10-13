@@ -101,7 +101,7 @@ public class FollowAction extends ActionBase {
             //フォローを外したい従業員のidを取得
             Employee followee = serviceE.getEmployee(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
-            // Followのインスタンスを生成
+            // followerとfolloweeのインスタンスを生成
             Follow f = new Follow(
                     null,
                     follower, //ログインしている従業員を、followerとして登録する

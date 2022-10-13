@@ -74,7 +74,7 @@ public class FollowService extends ServiceBase {
         //followerとfolloweeを条件に登録済みのフォローを取得する
         Follow f = findRelation(follower,followee);
 
-        //更新処理を行う
+        //フォローデータを削除する
 
         em.getTransaction().begin();
         em.remove(f);       // データ削除
