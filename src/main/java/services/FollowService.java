@@ -7,6 +7,7 @@ package services;
 import javax.persistence.NoResultException;
 
 import constants.JpaConst;
+import models.Employee;
 import models.Follow;
 
 
@@ -46,7 +47,7 @@ public class FollowService extends ServiceBase {
 
     * @return 取得データのインスタンス 取得できない場合null
     */
-    public Follow findRelation(Follow follower,Follow followee) {
+    public Follow findRelation(Employee follower,Employee followee) {
         Follow f = null;
         try {
 
@@ -67,7 +68,7 @@ public class FollowService extends ServiceBase {
      * idを条件にフォローデータを削除する
      * @param id
      */
-    public void destroy(Follow follower, Follow followee) {
+    public void destroy(Employee follower, Employee followee) {
 
         //followerとfolloweeを条件に登録済みのフォローを取得する
         Follow f = findRelation(follower,followee);

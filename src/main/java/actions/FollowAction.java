@@ -52,14 +52,10 @@ public class FollowAction extends ActionBase {
         //フォローしたい従業員のidを取得
         Employee followee = serviceE.getEmployee(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
-        // Followのインスタンスを生成
-        Follow f = new Follow(
-                null,
-                follower, //ログインしている従業員を、followerとして登録する
-                followee);
+        
 
 
-       /** //follower,followeeより、フォローテーブルを検索して
+       //follower,followeeより、フォローテーブルを検索して
         //フォロー情報の存在チェック
         Follow f = serviceF.findRrelation(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
@@ -69,6 +65,11 @@ public class FollowAction extends ActionBase {
             redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
 
         } else {*/
+            // Followのインスタンスを生成
+            Follow f = new Follow(
+                null,
+                follower, //ログインしている従業員を、followerとして登録する
+                followee);
           //存在しなければFollow情報登録
             serviceF.create(f);
 
@@ -101,16 +102,12 @@ public class FollowAction extends ActionBase {
             //フォローを外したい従業員のidを取得
             Employee followee = serviceE.getEmployee(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
-            // followerとfolloweeのインスタンスを生成
-            Follow f = new Follow(
-                    null,
-                    follower, //ログインしている従業員を、followerとして登録する
-                    followee);
+
 
 
 
                 //idを条件に従業員データを削除する
-                serviceF.destroy(f, null);
+                serviceF.destroy(follower, followee);
 
                 //セッションに削除完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
