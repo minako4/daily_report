@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import models.Employee;
+import models.Follow;
+import services.FollowService;
 import services.ReportService;
 
 /**
@@ -21,6 +25,7 @@ import services.ReportService;
 public class ReportAction extends ActionBase {
 
     private ReportService service;
+    private FollowService serviceF;
 
     /**
      * メソッドを実行する
@@ -29,10 +34,12 @@ public class ReportAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new ReportService();
+        serviceF = new FollowService();
 
         //メソッドを実行
         invoke();
         service.close();
+        serviceF.close();
     }
 
     /**
@@ -227,5 +234,34 @@ public class ReportAction extends ActionBase {
                 redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
             }
         }
+    }
+    /**
+     * 一覧画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void follows() throws ServletException, IOException {
+
+        //指定されたページ数の一覧画面に表示するフォローデータを取得
+        int page = getPage();
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        Employee e = EmployeeConverter.toModel(ev);
+        List<Follow> follows = serviceF.getAllPerPage(e,page);
+
+
+        putRequestScope(AttributeConst.FOLLOWS, follows); //取得したフォローデータ
+        putRequestScope(AttributeConst.PAGE, page); //ページ数
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
+
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if (flush != null) {
+            putRequestScope(AttributeConst.FLUSH, flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
+
+        //一覧画面を表示
+        forward(ForwardConst.FW_REP_FOLLOWS);
     }
 }

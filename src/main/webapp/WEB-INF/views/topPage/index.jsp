@@ -10,6 +10,8 @@
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commfollows" value="follows" />
+
 
 
 <c:import url="../layout/app.jsp">
@@ -22,6 +24,7 @@
         <h2>日報管理システムへようこそ</h2>
 
         <h3>【自分の日報　一覧】</h3>
+        <h3><a href="<c:url value='?action=${actRep}&command=${commfollows}' />">【フォロー中の従業員一覧】</a></h3>
 
         <table id="report_list">
             <tbody>

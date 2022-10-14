@@ -84,12 +84,13 @@ public class FollowService extends ServiceBase {
     }
 
     /**
-     * 指定されたページ数の一覧画面に表示する日報データを取得し、Followのリストで返却する
+     * 指定されたページ数の一覧画面に表示するフォローデータを取得し、Followのリストで返却する
      * @param page ページ数
      * @return 一覧画面に表示するデータのリスト
      */
-    public List<Follow> getAllPerPage(int page) {
+    public List<Follow> getAllPerPage(Employee follower ,int page) {
         List<Follow> follows = em.createNamedQuery(JpaConst.Q_FOLLOW_GET_ALL_FOLLOW, Follow.class)
+                .setParameter(JpaConst.JPQL_PARM_FOLLOW, follower)
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();

@@ -18,20 +18,20 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>フォロー中の日報 一覧</h2>
-        <table id="report_list">
+        <h2>フォロー中の従業員 一覧</h2>
+        <table id="follows_list">
             <tbody>
                 <tr>
-                    <th class="report_name">氏名</th>
+                    <th class="follow_name">氏名</th>
 
-                    <th class="report_date">日付</th>
-                    <th class="report_title">タイトル</th>
+
+
                     <th class="report_action">操作</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
-                    <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
+                <c:forEach var="follow" items="${follows}" varStatus="status">
+
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" />
+                        <td class="report_name"><c:out value="${follower}" />
 
                         </td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
