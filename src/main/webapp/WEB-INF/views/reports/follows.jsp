@@ -28,22 +28,26 @@
 
                     <th class="report_action">操作</th>
                 </tr>
-                <c:forEach var="follow" items="${follows}" varStatus="status">
+               <c:forEach var="follow" items="${follows}" varStatus="status">
 
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${follower}" />
+                        <td class="follows_name"><c:out value="${follow.followee.name}" />
+                        <td class="follows_name">
+                        <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commDel}&id=${follow.followee.id}' />">
+                         <input type="hidden" name="destroy" id="id"  value="${follow.followee.id}" />
+                                <button type="submit">フォローを外す</button>
+                         </form>
 
                         </td>
-                        <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
+
+
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
 
     <div id="pagination">
-        (全 ${reports_count} 件) <br />
+         <br />
         <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
             <c:choose>
                 <c:when test="${i == page}">

@@ -23,22 +23,21 @@
             <tbody>
                 <tr>
                     <th class="report_name">氏名</th>
-
+                    <th class="follow">フォロー</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
+
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" />
-
-
+                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
+                        <td class="follow">
                          <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commFollow}&id=${report.employee.id}' />">
                          <input type="hidden" name="followee" id="id"  value="${report.employee.id}" />
                                 <button type="submit">フォロー</button>
                          </form>
-
                          <form method="POST" action="<c:url value='/?action=${actFollow}&command=${commDel}&id=${report.employee.id}' />">
                          <input type="hidden" name="destroy" id="id"  value="${report.employee.id}" />
                                 <button type="submit">フォローを外す</button>

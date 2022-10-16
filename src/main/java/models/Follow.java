@@ -29,6 +29,7 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE,
             query = JpaConst.Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE_DEF),
+
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)

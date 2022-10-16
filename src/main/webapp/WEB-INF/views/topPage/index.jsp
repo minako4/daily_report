@@ -23,8 +23,7 @@
         </c:if>
         <h2>日報管理システムへようこそ</h2>
 
-        <h3>【自分の日報　一覧】</h3>
-        <h3><a href="<c:url value='?action=${actRep}&command=${commfollows}' />">【フォロー中の従業員一覧】</a></h3>
+        <h3>【フォロー中の日報　一覧】</h3>
 
         <table id="report_list">
             <tbody>

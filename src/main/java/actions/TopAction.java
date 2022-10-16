@@ -39,18 +39,20 @@ public class TopAction extends ActionBase {
      */
     public void index() throws ServletException, IOException {
 
+
         //セッションからログイン中の従業員情報を取得
         EmployeeView loginEmployee = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
-        //ログイン中の従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
+
+        //ログイン中の従業員がフォローしたidが作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
         int page = getPage();
-        List<ReportView> reports = service.getMinePerPage(loginEmployee, page);
+        List<ReportView> followReports = service. getAllFollow(loginEmployee, page);
 
-        //ログイン中の従業員が作成した日報データの件数を取得
-        long myReportsCount = service.countAllMine(loginEmployee);
+        //ログイン中の従業員がフォローした従業員の日報データの件数を取得
+        long followReportsCount = service. countAllFollow(loginEmployee);
 
-        putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
-        putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //ログイン中の従業員が作成した日報の数
+        putRequestScope(AttributeConst.REPORTS, followReports); //取得した日報データ
+        putRequestScope(AttributeConst.REP_COUNT, followReportsCount); //ログイン中の従業員が作成した日報の数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 

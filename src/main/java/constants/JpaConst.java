@@ -95,5 +95,12 @@ public interface JpaConst {
     String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE = ENTITY_FOLLOW + ".getByFollowerFollowee";
     String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE_DEF = "SELECT f  FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOWER + " AND f.followee = :" + JPQL_PARM_FOLLOWEE;
 
+    //フォローした人の日報の件数を取得する
+    String Q_REP_COUNT_ALL_FOLLOW = ENTITY_REP + ".countAllFollow";
+    String Q_REP_COUNT_ALL_FOLLOW_DEF =  "SELECT COUNT (r) FROM Report r INNER JOIN Follow f  ON f.followee = r.employee WHERE f.follower = :" +  JPQL_PARM_FOLLOWEE ;
+
+    //フォローした人の日報情報を取得する
+    String Q_REP_GET_ALL_FOLLOW = ENTITY_REP + ".getAllFollow";
+    String Q_REP_GET_ALL_FOLLOW_DEF = "SELECT r FROM Report r INNER JOIN Follow f  ON f.followee = r.employee WHERE f.follower = :" +  JPQL_PARM_FOLLOWEE ;
 
 }
