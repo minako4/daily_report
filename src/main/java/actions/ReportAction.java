@@ -249,8 +249,12 @@ public class ReportAction extends ActionBase {
         Employee e = EmployeeConverter.toModel(ev);
         List<Follow> follows = serviceF.getAllPerPage(e,page);
 
+        //全フォローデータの件数を取得
+        long followsCount = serviceF.countAllFollow(ev);
+
 
         putRequestScope(AttributeConst.FOLLOWS, follows); //取得したフォローデータ
+        putRequestScope(AttributeConst.FOLLOW_COUNT, followsCount); // 全てのフォローデータの件数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
@@ -264,4 +268,5 @@ public class ReportAction extends ActionBase {
         //一覧画面を表示
         forward(ForwardConst.FW_REP_FOLLOWS);
     }
+
 }

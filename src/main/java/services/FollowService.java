@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import actions.views.EmployeeConverter;
+import actions.views.EmployeeView;
 import constants.JpaConst;
 import models.Employee;
 import models.Follow;
@@ -96,6 +98,21 @@ public class FollowService extends ServiceBase {
                 .getResultList();
         return (follows);
 
+
+    }
+
+    /**
+     * 指定した従業員がフォローしたフォロイーの件数を取得し、返却する
+     * @param employee
+     * @return フォローデータの件数
+     */
+    public long countAllFollow(EmployeeView employee) {
+
+        long count = (long) em.createNamedQuery(JpaConst.Q_FOLLOW_COUNT_ALL_FOLLOW, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_FOLLOW, EmployeeConverter.toModel(employee))
+                .getSingleResult();
+
+        return count;
     }
 
 

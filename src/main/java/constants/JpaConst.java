@@ -90,7 +90,9 @@ public interface JpaConst {
     //指定した従業員がフォローした人を全件idの降順で取得する
     String Q_FOLLOW_GET_ALL_FOLLOW = ENTITY_REP + ".getAllMineFollow";
     String Q_FOLLOW_GET_ALL_FOLLOW_DEF = "SELECT f FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOW + " ORDER BY f.follower DESC";
-
+    //指定した従業員がフォローした人の件数を取得する
+    String Q_FOLLOW_COUNT_ALL_FOLLOW = ENTITY_REP + ".countAllMineFollow";
+    String Q_FOLLOW_COUNT_ALL_FOLLOW_DEF = "SELECT COUNT (f) FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOW;
     //followerIDとfolloweeIDを条件に未削除のrelationを取得する
     String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE = ENTITY_FOLLOW + ".getByFollowerFollowee";
     String Q_FOLLOW_GET_BY_FOLLOWER_AND_FOLLOWEE_DEF = "SELECT f  FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_FOLLOWER + " AND f.followee = :" + JPQL_PARM_FOLLOWEE;
